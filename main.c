@@ -1,6 +1,10 @@
 #include "monty.h"
 
+
+
 stack_t *head = NULL;
+
+
 
 /**
  * main - entry point
@@ -12,6 +16,7 @@ stack_t *head = NULL;
 
 
 int main(int argc, char *argv[])
+
 {
 
 	if (argc != 2)
@@ -144,5 +149,4 @@ void add_to_queue(stack_t **new_node, __attribute__((unused))unsigned int ln)
 
 
 
-et number
-
+}
