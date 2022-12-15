@@ -17,6 +17,7 @@ void open_file(char *file_name)
 	fclose(fd);
 }
 
+
 /**
  * read_file - reads a file
  * @fd: pointer to file descriptor
@@ -32,11 +33,10 @@ void read_file(FILE *fd)
 	for (line_number = 1; getline(&buffer, &len, fd) != -1; line_number++)
 	{
 		format = parse_line(buffer, line_number, format);
-
 	}
-
 	free(buffer);
 }
+
 
 /**
  * parse_line - Separates each line into tokens to determine
@@ -57,15 +57,12 @@ int parse_line(char *buffer, int line_number, int format)
 		err(4);
 
 	opcode = strtok(buffer, delim);
-
 	if (opcode == NULL)
 		return (format);
-
 	value = strtok(NULL, delim);
 
 	if (strcmp(opcode, "stack") == 0)
 		return (0);
-
 	if (strcmp(opcode, "queue") == 0)
 		return (1);
 
@@ -82,47 +79,28 @@ int parse_line(char *buffer, int line_number, int format)
  * if 1 nodes will be entered as a queue.
  * Return: void
  */
-
 void find_func(char *opcode, char *value, int ln, int format)
 {
 	int i;
-
 	int flag;
 
 	instruction_t func_list[] = {
-
 		{"push", add_to_stack},
-
 		{"pall", print_stack},
-
 		{"pint", print_top},
-
 		{"pop", pop_top},
-
 		{"nop", nop},
-
 		{"swap", swap_nodes},
-
 		{"add", add_nodes},
-
 		{"sub", sub_nodes},
-
 		{"div", div_nodes},
-
 		{"mul", mul_nodes},
-
 		{"mod", mod_nodes},
-
 		{"pchar", print_char},
-
 		{"pstr", print_str},
-
 		{"rotl", rotl},
-
 		{"rotr", rotr},
-
 		{NULL, NULL}
-
 	};
 
 	if (opcode[0] == '#')
@@ -134,15 +112,12 @@ void find_func(char *opcode, char *value, int ln, int format)
 		{
 			call_fun(func_list[i].f, opcode, value, ln, format);
 			flag = 0;
-
 		}
-
 	}
-
 	if (flag == 1)
 		err(3, ln, opcode);
-
 }
+
 
 /**
  * call_fun - Calls the required function.
@@ -153,14 +128,13 @@ void find_func(char *opcode, char *value, int ln, int format)
  * @format: Format specifier. If 0 Nodes will be entered as a stack.
  * if 1 nodes will be entered as a queue.
  */
-
 void call_fun(op_func func, char *op, char *val, int ln, int format)
 {
 	stack_t *node;
 	int flag;
 	int i;
-	flag = 1;
 
+	flag = 1;
 	if (strcmp(op, "push") == 0)
 	{
 		if (val != NULL && val[0] == '-')
@@ -170,22 +144,16 @@ void call_fun(op_func func, char *op, char *val, int ln, int format)
 		}
 		if (val == NULL)
 			err(5, ln);
-
 		for (i = 0; val[i] != '\0'; i++)
 		{
 			if (isdigit(val[i]) == 0)
 				err(5, ln);
-
 		}
-
 		node = create_node(atoi(val) * flag);
-
 		if (format == 0)
 			func(&node, ln);
-
 		if (format == 1)
 			add_to_queue(&node, ln);
-
 	}
 	else
 		func(&head, ln);
