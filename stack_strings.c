@@ -42,7 +42,8 @@ void print_str(stack_t **stack, __attribute__((unused))unsigned int ln)
 			break;
 		printf("%c", ascii);
 		tmp = tmp->next;
-	}	printf("\n");
+	}
+	printf("\n");
 }
 
 /**
@@ -51,7 +52,6 @@ void print_str(stack_t **stack, __attribute__((unused))unsigned int ln)
  * @ln: Interger representing the line number of of the opcode.
  */
 void rotl(stack_t **stack, __attribute__((unused))unsigned int ln)
-
 {
 	stack_t *tmp;
 
@@ -83,7 +83,6 @@ void rotr(stack_t **stack, __attribute__((unused))unsigned int ln)
 		return;
 
 	tmp = *stack;
-
 	while (tmp->next != NULL)
 		tmp = tmp->next;
 
